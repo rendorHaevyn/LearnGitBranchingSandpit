@@ -21,15 +21,10 @@ class FuzzyLibError(Exception):
     def __init__(self, error_number):
         self.error_number = error_number
 
-
 is_64bits = sys.maxsize > 2**32
-if is_64bits:
-    raise NotImplementedError('64bit python is not supported')
-
 _package_path = split(__file__)[0]
-_lib_path = join(_package_path, r'bin\fuzzy.dll')
+_lib_path = join(_package_path, r'bin\fuzzy_64.dll' if is_64bits else r'bin\fuzzy.dll')
 fuzzy_lib = ctypes.cdll.LoadLibrary(_lib_path)
-
 
 def compare(signature_1, signature_2):
     """Computes the match score between two fuzzy hash signatures.
