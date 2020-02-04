@@ -31,6 +31,7 @@ Action (8) basically says push to origin (remote repo) the diff from master (loc
 
 * View *reflog* and history *log*, such as: `git log -5` and `git reflog -5`
 * *Branches* are essentially *pointers* to a specific commit, and can be created by: `git checkout -b "branchName"` or doing both the following: `git branch "branchName"`, `git checkout branchName`
+* *Remote tracking* can be set on a new branch by `git checkout -b <<localBranch>> origin/<<remoteBranch>>` or on an existing branch with `git branch -u origin/<<remoteBranch>> <<localBranch>>` (the local branch name can be left off this statement if it's already selected)
 * *Merging* branches to master: merge commits and changes onto target branch, preserves history, better merge conflicts, easy to undo, can be messy (graphically): `git checkout master`, `git merge branchName`
 * *Rebasing* branches to master: moves the commits and changes onto the target branch, a clean history, readable graph, harder to undo: in one command - `git rebase <CommitTo> <CommitFrom>`, or in two commands - `git checkout <CommitFrom>`, `git rebase <CommitTo>`
 * View the *diff* between branches: `git diff <<branch1>> <<branch2>>`
@@ -44,7 +45,9 @@ Action (8) basically says push to origin (remote repo) the diff from master (loc
 * We can also do some crazy shit by using *interactive rebase* to pick and squash and do other stuff: `git rebase -i <Commit1>`
 * Using *tag* we can create a permanent pointer to a commit, like a version release: `git tag AlphaVer <Commit1>`
 * We can determine where we are relative to tags by using: `git describe --tags <CommitName>`; output might be like: `alphaDemo-4-g2e087f6` (<tagName>-<# Commits upstream>-g<CurrentCommitHash>)
-* Both git *pull* and git *merge* download data from a remote repo.  A `git pull` is roughly the equivalent of doing a `git fetch`, followed by a `git merge`.  Fetch downloads remote repo data only.  Pull downloads remote repo data, then integrates it into local HEAD branch current working copy files
+* Both git *pull* and git *fetch* download data from a remote repo.  However, `git pull` is roughly the equivalent of doing a `git fetch`, followed by a `git merge`.  Fetch downloads remote repo data only.  Pull downloads remote repo data, then integrates it into local HEAD branch current working copy files
+* We can *fetch* and *rebase* data where an ambiguous history exists, then push, with `git pull --rebase` and `git push <remote> <<localBranch>>`, ie: `git push origin master` == `git push origin/master master`
+* Crazy things like `git push <remote> <source>:<destination>` also allow us to push in a fancy manner, such as `git push orign foo^:master`, which would push 1 commit upstream of foo local to origin/master remote
 
 ### More additional valuable commands
 
@@ -52,7 +55,7 @@ Action (8) basically says push to origin (remote repo) the diff from master (loc
 
 * *amend* last commit with a new file / file change, eg: `git add README.md` and `git commit --amend`.  You will be prompted to modify the commit message, then the staged changes will be pushed
 * *split commit* into several commit chunks, by resetting the HEAD and adding the chunks: `git reset HEAD~1` and cycle the following: `git add --patch`, `git commit -m "some message 1"`; `git add --patch`, `git commit -m "some message 1"`...
-* *stash* changes using `git stash`, do things / checkout another branch, then recover using `git stash apply` (which will leave the accessible for later) or `git stash pop`
+* *stash* changes using `git stash`, do things / checkout another branch, then recover using `git stash apply <<stashName>>` (which will leave the accessible for later or removal with `git stash drop <<stashName>>)` or `git stash pop`, and review the current stash list with `git stash list`
 * *squash commits* by either (1): moving up the tree (x commits) with `git reset HEAD~x` and squash by `git commit -am "commit message"`; or, (2): `git rebase -i master` (where master == branch name), and using *pick* or *squash* to choose what commits to select / squash
 
 ## Git Comments
