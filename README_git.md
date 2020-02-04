@@ -44,6 +44,16 @@ Action (8) basically says push to origin (remote repo) the diff from master (loc
 * We can also do some crazy shit by using *interactive rebase* to pick and squash and do other stuff: `git rebase -i <Commit1>`
 * Using *tag* we can create a permanent pointer to a commit, like a version release: `git tag AlphaVer <Commit1>`
 * We can determine where we are relative to tags by using: `git describe --tags <CommitName>`; output might be like: `alphaDemo-4-g2e087f6` (<tagName>-<# Commits upstream>-g<CurrentCommitHash>)
+* Both git *pull* and git *merge* download data from a remote repo.  A `git pull` is roughly the equivalent of doing a `git fetch`, followed by a `git merge`.  Fetch downloads remote repo data only.  Pull downloads remote repo data, then integrates it into local HEAD branch current working copy files
+
+### More additional valuable commands
+
+[Compliments dev.to article](https://dev.to/jacobherrington/4-useful-patterns-in-git-19ac)
+
+* *amend* last commit with a new file / file change, eg: `git add README.md` and `git commit --amend`.  You will be prompted to modify the commit message, then the staged changes will be pushed
+* *split commit* into several commit chunks, by resetting the HEAD and adding the chunks: `git reset HEAD~1` and cycle the following: `git add --patch`, `git commit -m "some message 1"`; `git add --patch`, `git commit -m "some message 1"`...
+* *stash* changes using `git stash`, do things / checkout another branch, then recover using `git stash apply` (which will leave the accessible for later) or `git stash pop`
+* *squash commits* by either (1): moving up the tree (x commits) with `git reset HEAD~x` and squash by `git commit -am "commit message"`; or, (2): `git rebase -i master` (where master == branch name), and using *pick* or *squash* to choose what commits to select / squash
 
 ## Git Comments
 
