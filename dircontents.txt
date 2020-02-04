@@ -1,0 +1,8 @@
+total 4096
+-rw-r--r-- 1 cmcpherson2 1049089     0 Feb  4 11:47 dircontents.txt
+-rw-r--r-- 1 cmcpherson2 1049089 35815 Feb  4 11:10 LICENSE
+-rw-r--r-- 1 cmcpherson2 1049089   581 Feb  4 11:24 README.md
+-rw-r--r-- 1 cmcpherson2 1049089  4075 Feb  4 11:42 README_git.md
+-rw-r--r-- 1 cmcpherson2 1049089   323 Feb  4 11:10 setup.py
+drwxr-xr-x 1 cmcpherson2 1049089     0 Feb  4 11:10 ssdeep/
+drwxr-xr-x 1 cmcpherson2 1049089     0 Feb  4 11:10 tests/
